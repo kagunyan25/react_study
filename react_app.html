@@ -6,14 +6,29 @@
         <script src ="https://unpkg.com/react@16/umd/react.development.js">
         </script>
         <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <style>
+          #root{
+            cursor:pointer;
+            font-size:20pt;
+            background-color:lightblue;
+            padding:1px 20px;
+          }
+        </style>
     </head>
     <body>
         <h1>React</h1>
-        <div id="root">wait…</div>
+        <div id="root" onClick="doCount();">wait…</div>
         <script>
-            let dom = document.querySelector('#root');
-            let element = React.createElement('p',{},'Hello React!');
+          let counter = 0;
+          let dom = document.querySelector('#root');
+          doCount();
+          
+          function doCount(){
+            counter++;
+            let element = React.createElement('p',{},"count:"+counter);
             ReactDOM.render(element,dom);
+          }
+          
         </script>
     </body>
 </html>
