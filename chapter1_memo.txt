@@ -1,0 +1,27 @@
+第一章
+p23
+CDN…content Delivery Networkの略.Reactを利用する際には、ReactとReact-Domを読み込む.
+p25
+Reactはもともと用意されているHTMLのタグの一部を書き換えて独自の表示を組み込む.
+  ・エレメントの作成  
+    React.createElement(タグ名, 属性, 中に組み込まれるもの);
+      ex) let element = React.createElement('p',{},'Hello React!');  
+
+  ・レンダリングした表示の作成　プログラムのオブジェクトを具体的に目に見えるような形に変換する作業
+    ReactDOM.render(エレメント, DOM);
+      ex) ReactDOM.render(element,dom);
+p28
+Node.js…JavaScriptでサーバープログラムの開発を行うのに多用されているJavaScriptの実行環境.
+Reactのアプリケーションを作成するにはNode.jsに組み込まれているnpxというプログラムを用いる.
+p38
+npx create-react-app プロジェクト名
+npm init react-app プロジェクト名
+p39
+npm start…開発のサーバープログラムを使ってプロジェクトを実行. 
+npm run build…プロジェクトのビルド.webサーバーにアップロードして利用するファイル類を生成する作業など.
+p42
+srcフォルダ…最も重要なフォルダ.Reactで作成するスクリプトなどのファイルが記述される.開発の基本.
+publicフォルダ…プログラムから利用するイメージやスタイルシートといったファイル類の設置.
+node_modulesフォルダ…直接編集することはない！いじらない！
+
+
