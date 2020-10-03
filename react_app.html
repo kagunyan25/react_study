@@ -13,7 +13,7 @@
         <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js">
         </script>
         
-    </head>aaa
+    </head>
     <body>
         <h1>React</h1>
         <div id="root">wait…</div>
@@ -26,28 +26,20 @@
         let message = 'メッセージを表示します.';
         // let link = "http://google.com";
 
-        const msg_s = {
+        const msg = {
           fontSize:"20pt",
           fontWeight:"bold",
           color:"red",
           border:"2px solid green"
         }
 
-        let printMsg = function(msg, size, color){
-          const style = {
-            fontSize:size + "pt",
-            fontWeight:'700',
-            color:color,
-            border:"1px solid"+color
-          };
-          return <p style={style}>{msg}</p>;//"指定したスタイルでメッセージを表示する"が戻り値
-        }
+        let flg = true;//真偽値
 
         let el = (
           <div>
-            {printMsg('最初のメッセージ',30,'#ddd')}
-            {printMsg('次のメッセージ',20,'#aaa')}
-            {printMsg('最後のメッセージ',14,'#333')}
+          {flg &&
+            <p style = {msg}>{message}</p>
+            }
           </div>
         );
 
