@@ -27,29 +27,22 @@
         let message_false = 'メッセージはありません.'
         // let link = "http://google.com";
 
-        const msg_true = {
-          fontSize:"20pt",
-          fontWeight:"bold",
-          color:"red",
-          border:"2px solid green"
-        }
+        const list = {
+          fontSize:"18px",
+          padding:"5px 50px"
+        };
 
-        const msg_false = {
-          fontSize:"16pt",
-          fontWeight:"plain",
-          color:"white",
-          border:"blue"
-        }
-
-        let flg = false;//真偽値
+        let data = [
+          <li>One</li>,
+          <li>Two</li>,
+          <li>Three</li>
+        ];
 
         let el = (
           <div>
-          {flg ?
-            <p style = {msg_true}>{message_true}</p>
-            :
-            <p style = {msg_false}>{message_false}</p>
-            }
+            <ul style={list}>
+            {data}
+            </ul>
           </div>
         );
 
