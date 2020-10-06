@@ -25,19 +25,24 @@
         const p = {
           fontSize:"20px",
           padding:"10px",
+          backgroundColor:"blue",
+          color:"white",
+          cursor:"pointer"
         };
 
         var counter = 0;
 
-        setInterval(() =>{//一定間隔で処理実行
+        let doAction = (event)=>{
           counter++;
           let el = (
             <div>
-              <p style={p}>count:{counter}</p>
+              <p onClick={doAction} style={p}>count:{counter}</p>
             </div>
           );
           ReactDOM.render(el, dom);
-           },1000);//1000ﾐﾘ秒ごと
+           };
+
+          doAction();
 
         </script>
     </body>
