@@ -22,44 +22,44 @@
         <script type = "text/babel">
         let dom = document.querySelector('#root');
 
-        const p = {
-          fontSize:"20px",
-          padding:"10px",
-        };
+        class Rect extends React.Component{
+          x=0;
+          y=0;
+          width=0;
+          height=0;
+          color="white";
+          style={};
 
-        const input = {
-          fontSize:"16pt",
-          padding:"5px 10px",
-        };
+          constructor(props){
+            super(props);
+            this.x=props.x;
+            this.y=props.y;
+            this.width=props.w;
+            this.height=props.h;
+            this.color=props.c;
+            this.style={
+              backgroundColor:this.color,
+              position:"absolute",
+              left:this.x+"px",
+              top:this.y+"px",
+              width:this.width+"px",
+              height:this.height+"px"
+            }
+          }
 
-        let message = "お名前をどうぞ";
-        let in_val = '';
+          render(){
+            return <div style ={this.style}></div>;
+          }
+        }
 
-        let doChange = (event)=>{
-          in_val=event.target.value;{/*今回の場合はinput type="text"*/}
-          message='こんにちは'+in_val+'さん';
-        };
-
-        let doAction = (event)=>{
-          let el=(
-            <div>
-              <p style = {p}>{message}</p>
-              <div>
-              
-                <input type="text" id="input" style = {input} 
-                  onChange={doChange}/>{/*値が入力されるとdoChange関数が実行*/}
-                <button onClick={doAction} style={input}>{/*ボタンがクリックされるとdoAction関数が実行*/}
-                  Click
-                </button>
-                
-              </div>
-            </div>
-          );
-          ReactDOM.render(el,dom);
-          
-        };
-
-        doAction();
+        //表示するJSX
+        let el = (
+          <div>
+              <Rect x="100" y="100" w="100" h="100" c="cyan"/>
+              <Rect x="150" y="150" w="100" h="100" c="magenta"/>
+          </div>
+        );
+        ReactDOM.render(el,dom);
 
         </script>
     </body>
