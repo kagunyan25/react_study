@@ -3,8 +3,12 @@ import React, {Component} from 'react';//Reactオブジェクトの中のCompone
 import './App.css';
 import Rect from './Rect';
 
-class App extends Component {
-  data=[];//配列を保管するプロパティ　doActionでクリックした位置の情報を追加する.
+class App extends Component {//表示のベースとなるコンポーネント
+  data=[
+    "This is list sample",
+    "これはリストのサンプルです",
+    "配列をリストに変換します"
+  ];
 
   msgStyle = {
     fontSize:"20pt",
@@ -13,52 +17,69 @@ class App extends Component {
     padding:"5px",
   }
   
-  area = {
-    width:"500px",
-    height:"500px",
-    padding:"1px solid blue",
-  }
-
+  
   constructor(props){
     super(props);
     this.state={//あくまでステートの初期化
       list:this.data
     };
-    this.doAction=this.doAction.bind(this);
   }
-
-    doAction(e){
-      let x=e.pageX;//ページの左上からクリックした地点までの距離
-      let y=e.pageY;//同様
-      this.data.push({x:x,y:y});//{x:横位置,y:縦位置}をthis.dataにpushで追加
-      this.setState({
-        list:this.data//listステートに設定
-      });
-    }
-
-    draw(d){
-      let s={
-        position:"absolute",
-        left:(d.x-25)+"px",
-        top:(d.y-25)+"px",
-        width:"50px",
-        height:"50px",
-        backgroundColor:"#66f3",
-      };
-      return <div style={s}></div>
-    }
-  
 
   render(){
     return <div>
       <h1>React</h1>
-      <h2 style={this.msgStyle}>show rect.</h2>
-      <div style={this.area} onClick={this.doAction}>
-        {this.data.map((value)=>this.draw(value))}
-      </div>
+      <h2 style={this.msgStyle}>show list.</h2>
+      <List title="サンプルリスト" data={this.data}/>
     </div>;
+    }
   }
-}
 
+  class List extends Component{//リスト全体をまとめて表示するコンポーネント
+    number =1;
+    
+    title={
+      fontSize:"20pt",
+      fontWeight:"bold",
+      color:"blue",
+    };
 
+    render(){
+      let data=this.props.data;
+      return(
+        <div>
+          <p style={this.title}>{this.props.title}</p>
+          <ul>
+            {data.map((item)=>
+            <Item number={this.number++} value={item}
+            key={this.number}/>
+            )}
+          </ul>
+        </div>
+      );
+    }
+  }
+  
+  class Item extends Component{//リストの各項目を表示するコンポーネント
+    li={
+      listStyleType:"square",
+      fontSize:"16pt",
+      color:"#06",
+      margin:"0px",
+      padding:"0px",
+    }
+    num={
+      fontWeight:"bold",
+      color:"red"
+    }
+
+    render(){
+      return (
+        <li style={this.li}>
+          <span style={this.num}>[{this.props.number}]</span>
+          {this.props.value}
+        </li>
+      );
+    }
+  }
+   
 export default App;//class Appを使えるようにエクスポートしておく
