@@ -3,53 +3,53 @@ import React, {Component} from 'react';//Reactオブジェクトの中のCompone
 import './App.css';
 import Rect from './Rect';
 
-//titleとmessageという値を持つオブジェクトをコンテキストに設定
-let data = {title:'Title',message:'this is sample message.'};
-const SampleContext = React.createContext(data);
+let theme={
+  light:{
+    backgroundColor:"#eef",
+    color:"#006",
+    padding:"10px",
+  },
+  dark:{
+    backgroundColor:"#006",
+    color:"#eef",
+    padding:"10px",
+  }
+};
+
+const ThemeContext = React.createContext(theme.dark);
+
 
 class App extends Component{
-
-  newdata={
-    title:'新しいタイトル',
-    message:'これは新しいメッセージです.'
-  };
+  static contextType = ThemeContext;
 
   render(){
     return(
-      <div>
-        <h1>Context</h1>
-        <Title />
-        <Message />
-        <SampleContext.Provider value={this.newdata}>
-          <Title />
-          <Message />
-        </SampleContext.Provider>
-          <Title />
-          <Message />
+      <div style={this.context}>
+        <Title value="Content page"/>
+        <Message value="This is Content sample."/>
+        <Message value="※これはテーマのサンプルです."/>
       </div>
     );
   }
 }
 
 class Title extends Component{
-  static contextType = SampleContext;//コンテキストが使えるようになる
+  static contextType = ThemeContext;
 
   render(){
     return(
-      <div>
-        <h2>{this.context.title}</h2>
-      </div>
+      <h2 style={this.context}>{this.props.value}</h2>
     );
   }
 }
 
 class Message extends Component{
-  static contextType = SampleContext;//コンテキストが使えるようになる
+  static contextType = ThemeContext;//コンテキストが使えるようになる
 
   render(){
     return(
       <div>
-        <p>{this.context.message}</p>
+        <p style={this.context}>{this.props.value}</p>
       </div>
     );
   }
