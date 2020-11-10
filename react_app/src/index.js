@@ -7,7 +7,7 @@ import App from './App';
 
 //ストアに保管するステートの値
 let state_value={
-  conter:0,
+  counter:0,
   message:"COUNTER"
 }
 
