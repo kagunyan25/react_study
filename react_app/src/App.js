@@ -1,58 +1,83 @@
 import React, {Component} from 'react';//Reactオブジェクトの中のComponent
-//import logo from './logo.svg';
+import {connect} from 'react-redux';
 import './App.css';
-import Rect from './Rect';
 
-let theme={
-  light:{
-    backgroundColor:"#eef",
-    color:"#006",
-    padding:"10px",
-  },
-  dark:{
-    backgroundColor:"#006",
-    color:"#eef",
-    padding:"10px",
-  }
-};
+//ステートのマッピング
+function mappingState(state){
+  return state;
+}
 
-const ThemeContext = React.createContext(theme.dark);
-
-
+//Appコンポーネント
 class App extends Component{
-  static contextType = ThemeContext;
 
-  render(){
-    return(
-      <div style={this.context}>
-        <Title value="Content page"/>
-        <Message value="This is Content sample."/>
-        <Message value="※これはテーマのサンプルです."/>
-      </div>
-    );
+  constructor(props){
+    super(props);
   }
-}
-
-class Title extends Component{
-  static contextType = ThemeContext;
-
-  render(){
-    return(
-      <h2 style={this.context}>{this.props.value}</h2>
-    );
-  }
-}
-
-class Message extends Component{
-  static contextType = ThemeContext;//コンテキストが使えるようになる
 
   render(){
     return(
       <div>
-        <p style={this.context}>{this.props.value}</p>
+        <h1>Redux</h1>
+        <Message />
+        <Button />
       </div>
     );
   }
 }
+
+//ストアのコネクト
+// App = connect()(App);
+
+//メッセージ表示のコンポーネント
+class Message extends Component{
+  style = {
+    fontSize:"20pt",
+    padding:"20px 5px"
+  }
+
+  render(){
+    return(
+      <p style = {this.style}>
+        {this.props.message}:{this.props.counter}
+      </p>
+    );
+  }
+}
+
+//ストアのコネクト
+Message = connect(mappingState)(Message);
+
+//ボタン表示のコンポーネント
+class Button extends Component{
+  style={
+    fontSize:"16pt",
+    padding:"5px 10px"
+  }
+
+  constructor(props){
+    super(props);
+    this.doAction=this.doAction.bind(this);
+  }
+
+  //ボタンクリックでディスパッチを実行
+  doAction(e){
+    if(e.shiftKey){
+      this.props.dispatch({type:'DECREMENT'});//dispatch({type:*})->Reduxにアクションを送る働き
+    }else{
+      this.props.dispatch({type:'INCREMENT'});
+    }
+  }
+
+  render(){
+    return(
+      <button style={this.style} onClick={this.doAction}>
+        click
+      </button>
+    );
+  }
+}
+
+//ストアのコネクト
+Button=connect()(Button);
 
 export default App;//class Appを使えるようにエクスポートしておく
